@@ -187,6 +187,7 @@ macro_rules! make_keyboard_event {
         impl $name {
             // TODO return enum or something
             #[inline] pub fn key(&self) -> String { self.event.key() }
+            #[inline] pub fn code(&self) -> String { self.event.code() }
 
             #[inline] pub fn ctrl_key(&self) -> bool { self.event.ctrl_key() || self.event.meta_key() }
             #[inline] pub fn shift_key(&self) -> bool { self.event.shift_key() }
