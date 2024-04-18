@@ -88,6 +88,16 @@ pub enum MouseButton {
     Button5,
 }
 
+bitflags::bitflags! {
+    pub struct MouseButtons: u16 {
+        const Left = 1;
+        const Middle = 2;
+        const Right = 4;
+        const Button4 = 8;
+        const Button5 = 16;
+    }
+}
+
 macro_rules! make_mouse_event {
     ($name:ident => $event:path) => {
         make_event!($name => $event);
@@ -125,6 +135,10 @@ macro_rules! make_mouse_event {
                     4 => MouseButton::Button5,
                     _ => unreachable!("Unexpected MouseEvent.button value"),
                 }
+            }
+
+            pub fn buttons(&self) -> MouseButtons {
+                MouseButtons::from_bits(self.event.buttons()).unwrap()
             }
         }
     };
